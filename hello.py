@@ -3,7 +3,7 @@ from flask_bootstrap import Bootstrap
 from flask import render_template,session, redirect, url_for,flash
 from flask import  Flask
 from flask_wtf import FlaskForm
-from flask.ext.script import Manager
+
 from wtforms import StringField, SubmitField,PasswordField
 from wtforms.validators import DataRequired
 from flask.ext.sqlalchemy import SQLAlchemy
@@ -15,9 +15,16 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:qwert12345@localhost:3306/
 app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = True
 
 db = SQLAlchemy(app)
-manager = Manager(app)
 
 
+class User(db.Model):
+    __tablename__ = 'users'
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(64), unique=True, index=True)
+    role_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+
+    def __repr__(self):
+        return '<User %r>' % self.username
 
 class NameForm(FlaskForm):
     name = StringField('What is your name?', validators=[DataRequired()])

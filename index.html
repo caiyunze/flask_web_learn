@@ -1,0 +1,27 @@
+<<<<<<< HEAD
+{% import "bootstrap/wtf.html" as wtf %}
+{% extends "base.html" %}
+
+{% block title %}
+{{ super() }}
+-首页
+{% endblock %}
+
+{% block content %}
+{{ super() }}
+<div class="page-header">
+    <h2>welcome!</h2>
+<h1>username: {% if name %}{{ name }}{% else %}Stranger{% endif %}</h1>
+    <h1>password: {% if password %}{{ password }}{% else %}no_password{% endif %}</h1>
+=======
+<!DOCTYPE html>
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block title %}Flasky{% endblock %}
+{% block page_content %}
+<div class="page-header">
+<h1>Hello, {% if name %}{{ name }}{% else %}Stranger{% endif %}!</h1>
+>>>>>>> parent of 4794299... 提交代码
+</div>
+{{ wtf.quick_form(form) }}
+{% endblock %}
